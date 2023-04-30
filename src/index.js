@@ -1,26 +1,24 @@
 import Notiflix, { Notify } from 'notiflix';
-
 import ApiService from './js/fetchImages';
 import { createImagesCards } from './js/createImageCard';
+import { onScroll } from './js/scroll';
 
 const refs = {
   formEl: document.querySelector('#search-form'),
   galleryEl: document.querySelector('.gallery'),
-  loadMoreBtn: document.querySelector('.load-more'),
+  guardEl: document.querySelector('.guard'),
 };
 
-refs.loadMoreBtn.hidden = true;
-refs.formEl.addEventListener('submit', onSearch);
-refs.loadMoreBtn.addEventListener('click', onLoadMore);
+const options = {
+  root: null,
+  rootMargin: '300px',
+  threshold: 0,
+};
 
-// const options = {
-//   root: null,
-//   rootMargin: '100px',
-//   threshold: 0,
-// };
-
-// const observer = new IntersectionObserver(onPagination, options);
+const observer = new IntersectionObserver(onPagination, options);
 const apiService = new ApiService();
+
+refs.formEl.addEventListener('submit', onSearch);
 
 function onSearch(event) {
   event.preventDefault();
@@ -29,30 +27,37 @@ function onSearch(event) {
   if (apiService.query === '') {
     return Notiflix.Notify.info('Please, enter your serch parameters!');
   }
-  refs.loadMoreBtn.hidden = true;
+
   apiService.resetPage();
   cleanGallery();
   apiService.fetchImages().then(({ hits, totalHits }) => {
     if (totalHits === 0) {
-      //////////////
-      return Notiflix.Notify.info('Нічого не знайдено!');
-      /////////////////////////
+      return Notify.failure(
+        'Sorry, there are no images matching your search query. Please try again.'
+      );
     }
-    if (totalHits <= apiService.per_page) {
-      refs.loadMoreBtn.hidden = true;
-      createImagesCards(hits);
-    } else {
-      createImagesCards(hits);
-      refs.loadMoreBtn.hidden = false;
+    createImagesCards(hits);
+    if (apiService.page !== apiService.total_pages) {
+      observer.observe(refs.guardEl);
     }
-    Notiflix.Notify.info(`Hooray! We found ${totalHits} images.`);
+    Notiflix.Notify.success(`Hooray! We found ${totalHits} images.`);
   });
-}
-
-function onLoadMore() {
-  apiService.fetchImages().then(({ hits }) => createImagesCards(hits));
+  onScroll();
 }
 
 function cleanGallery() {
   refs.galleryEl.innerHTML = '';
+}
+
+function onPagination(entries, observer) {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      apiService.page += 1;
+      apiService.fetchImages().then(({ hits }) => createImagesCards(hits));
+
+      if (apiService.page === apiService.total_pages) {
+        observer.unobserve(guard);
+      }
+    }
+  });
 }

@@ -5,6 +5,7 @@ export default class ApiService {
     this.searchQuery = '';
     this.page = 1;
     this.per_page = 40;
+    this.total_pages = 0;
   }
 
   async fetchImages() {
@@ -26,6 +27,8 @@ export default class ApiService {
       this.incrementPage();
 
       console.log(response.data);
+      this.total_pages = response.data.totalHits / this.per_page;
+      console.log(this.total_pages);
       return response.data;
     } catch (error) {
       console.error(error);

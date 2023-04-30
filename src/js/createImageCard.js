@@ -16,8 +16,9 @@ function createImagesCards(images) {
         comments,
         downloads,
       }) =>
-        `<a class="gallery__link" href="${largeImageURL}">
+        `
 <div class="photo-card">
+<a class="gallery__link" href="${largeImageURL}">
         <img
           class="photo-card__img"
           src="${webformatURL}"
@@ -26,6 +27,7 @@ function createImagesCards(images) {
           width="320"
           height="212"
         />
+         
       <div class="info">
         <p class="info-item">
           <b>Likes</b>
@@ -44,16 +46,14 @@ function createImagesCards(images) {
           <span>${downloads}</span>
         </p>
       </div>
-    </div>
-        </a>`
+      </a>
+    </div>`
     )
     .join('');
 
   galleryEl.insertAdjacentHTML('beforeend', markup);
 
   const lightbox = new SimpleLightbox('.gallery a', {
-    captionsData: 'alt',
     captionDelay: 250,
-    captionPosition: 'bottom',
   });
 }
