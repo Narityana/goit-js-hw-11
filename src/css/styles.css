@@ -36,10 +36,6 @@ input {
     border-radius: 5px;
 }
 
-.is-hidden {
-  display: none;
-}
-
 .container {
   position: fixed;
   top: 0;
@@ -52,8 +48,6 @@ input {
   background: rgb(11, 47, 57);
     background: linear-gradient(90deg, rgba(11, 47, 57, 1) 0%, rgba(9, 90, 121, 0.9613095238095238) 40%, rgba(167, 237, 242, 1) 100%);
 }
-
-
 
 .gallery {
   
@@ -84,6 +78,7 @@ input {
 .info {
   display: flex;
   text-align: center;
+  gap: 10px;
   
 }
 .photo-card__img{
