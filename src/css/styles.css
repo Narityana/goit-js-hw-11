@@ -78,7 +78,8 @@ input {
 .info {
   display: flex;
   text-align: center;
-  gap: 10px;
+  gap: 20px;
+  justify-content: center;
   
 }
 .photo-card__img{
