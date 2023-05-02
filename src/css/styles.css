@@ -17,6 +17,10 @@ button{
   border: 1px solid transparent;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
 }
+button:hover, button:focus {
+color: white;
+  background-color: rgba(9, 90, 121, 0.9613095238095238);
+}
 
 input {
   width: 600px;
@@ -48,21 +52,8 @@ input {
   background: rgb(11, 47, 57);
     background: linear-gradient(90deg, rgba(11, 47, 57, 1) 0%, rgba(9, 90, 121, 0.9613095238095238) 40%, rgba(167, 237, 242, 1) 100%);
 }
-.button-container {
-  display: flex;
-  align-items: center;
-}
 
-.load-more {
-  margin: 50 auto 0;
-  width: 100px;
-  height: 30px;
-  color: white;
-  background-color: darkslateblue;
-  border-radius: 10px;
-  border-color: darkslateblue;
-  
-}
+
 
 .gallery {
   
@@ -114,4 +105,21 @@ display: block;
 
 .gallery__link:hover {
   cursor: zoom-in;
+}
+
+.guard {
+  display: flex;
+  justify-content: center;
+  
+}
+
+.last-page {
+  margin: 50px auto;
+  font-size: large;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  color: rgb(255, 255, 255);
+  background-color: rgba(9, 90, 121, 0.9613095238095238);
+  margin: 20px auto;
+    padding: 20px;
+    border-radius: 5px;
 }

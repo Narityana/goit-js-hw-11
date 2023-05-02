@@ -24,7 +24,6 @@ export default class ApiService {
     const url = `${BASE_URL}?${params}`;
     try {
       const response = await axios.get(url);
-      this.incrementPage();
 
       console.log(response.data);
       this.total_pages = response.data.totalHits / this.per_page;
@@ -41,9 +40,7 @@ export default class ApiService {
   set query(newQuery) {
     this.searchQuery = newQuery;
   }
-  incrementPage() {
-    this.page += 1;
-  }
+
   resetPage() {
     this.page = 1;
   }

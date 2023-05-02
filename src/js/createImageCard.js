@@ -1,6 +1,3 @@
-import SimpleLightbox from 'simplelightbox';
-import 'simplelightbox/dist/simple-lightbox.min.css';
-
 export { createImagesCards };
 
 const galleryEl = document.querySelector('.gallery');
@@ -52,8 +49,4 @@ function createImagesCards(images) {
     .join('');
 
   galleryEl.insertAdjacentHTML('beforeend', markup);
-
-  const lightbox = new SimpleLightbox('.gallery a', {
-    captionDelay: 250,
-  });
 }
