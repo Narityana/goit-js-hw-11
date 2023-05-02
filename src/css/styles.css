@@ -80,7 +80,11 @@ input {
   text-align: center;
   gap: 20px;
   justify-content: center;
+  padding: 10px;
   
+}
+.info p {
+  margin: 0;
 }
 .photo-card__img{
 display: block;
